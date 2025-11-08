@@ -1,0 +1,110 @@
+Switch>
+Switch>en
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname sh
+sh(config)#banner motd $ Unauthorized Access
+Enter TEXT message.  End with the character '$'.
+Unauthorized Access $
+
+sh(config)#line con 0
+sh(config-line)#password griet123
+sh(config-line)#login
+sh(config-line)#exit
+sh(config)#enable secret griet12345
+sh(config)#service password-encryption
+sh(config)#exit
+sh(config)#no ip domain-lookup
+sh(config)#exit
+sh#
+%SYS-5-CONFIG_I: Configured from console by console
+
+sh#copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+sh#show running-config
+Building configuration...
+
+Current configuration : 702 bytes
+!
+version 12.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname sh
+!
+enable secret 5 $1$mERr$ePjl38O0qbqrLcPxr0aI2/
+!
+!
+!
+ptp clock transparent domain 0 profile default
+no ip domain-lookup
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+!
+interface FastEthernet1/1
+!
+interface FastEthernet2/1
+!
+interface FastEthernet3/1
+!
+interface FastEthernet4/1
+!
+interface FastEthernet5/1
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+banner motd ^C Unauthorized Access
+Unauthorized Access ^C
+!
+!
+!
+line con 0
+ password 7 08265E470C0D544541
+ login
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+!
+!
+end
+
+
+
+sh#
+sh#exit
+
+
+sh con0 is now available
+
+
+
+Press RETURN to get started.
+
+
+
+ Unauthorized Access
+Unauthorized Access 
+
+User Access Verification
+
+Password: 
+
+sh>en
+Password: 
+sh#
+sh#
+sh#
