@@ -1,0 +1,31 @@
+——————2B. Sliding Win———Go back n————————
+#include <stdio.h>
+
+int main() {
+    int frames, ws;
+    int ack=0;
+    scanf("%d", &frames);
+    scanf("%d", &ws);
+    int i=0;
+    int j=0;
+    for(int j=0;j<ws;j++){
+        printf("Sent frame - %d\n", j);
+    }
+    while(i<frames){
+        printf("Acknowledge for frame - %d\n", i);
+        
+        scanf("%d", &ack);
+        if(ack==0){
+            for(int j=i;j<(i+ws)&&j<frames;j++){
+                printf("Sent frame - %d\n", j);
+            }
+        }else{
+            i++;
+            for(int j=i;j<(i+ws)&&j<frames;j++){
+                printf("Sent frame - %d\n", j);
+            }
+        }
+    }
+
+    return 0;
+}
