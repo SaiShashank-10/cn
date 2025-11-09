@@ -1,0 +1,39 @@
+3C
+
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+    int bucket_size = 10;
+    int tokens = 0;
+    int token_rate = 3;
+    int no_of_queries = 6;
+    int input_pkt_size[] = {4, 6, 8, 2, 1, 5};
+    int required_tokens = 4;
+    int queue = 0;
+    int time_interval = 1;
+    for (int i = 0; i < no_of_queries; i++) {
+        tokens += token_rate * time_interval;
+        printf("No of tokens: %d",tokens);
+        if (tokens > bucket_size) {
+            tokens = bucket_size;
+        }
+        printf("\nTime: %d seconds\n", i+1);
+        printf("Incoming packet size: %d\n", input_pkt_size[i]);
+        if (tokens < required_tokens) {
+            printf("Not enough tokens! Queuing packet of size %d.\n", input_pkt_size[i]);
+            queue += input_pkt_size[i];
+        }
+        else {
+            tokens -= required_tokens;
+            printf("Processed packet of size %d. Tokens remaining: %d\n", input_pkt_size[i], tokens);
+            while (queue > 0 && tokens >= required_tokens) {
+                printf("Processing queued packet of size %d\n", queue);
+                tokens -= required_tokens;
+                queue = 0;
+            }
+        }
+        printf("\nTokens in bucket: %d\n", tokens);
+        printf("Packets in queue: %d\n\n\n", queue);
+    }
+    return 0;
+}
