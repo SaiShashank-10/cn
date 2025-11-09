@@ -1,0 +1,35 @@
+--- NAT Dynamic--------------
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int fa0/0
+Router(config-if)#ip 10.0.0.3 255.0.0.0
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-if)#ip add 10.0.0.10 255.0.0.0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+ip nat inside
+Router(config-if)#int fa1/0
+Router(config-if)#ip add 20.0.0.3 255.0.0.0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet1/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet1/0, changed state to up
+ip nat outside
+Router(config-if)#exit
+Router(config)#access-list 1 permit 10.0.0.0 0.0.0.255
+Router(config)#ip nat pool newpool 20.0.0.3 20.0.0.1 netmask 255.0.0.0
+Router(config)#ip nat inside source 1 pool newpool
+                                    ^
+% Invalid input detected at '^' marker.
+	
+Router(config)#ip nat inside source list 1 pool newpool
+Router(config)#ip route 0.0.0.0 0.0.0.255 20.0.0.1
