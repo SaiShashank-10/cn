@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+void main() {
+	// your code goes here
+	int a[20], b[30], n;
+	printf("Enter Frame lenght: \n");
+	scanf("%d", &n);
+	
+	printf("Enter input frame 0's and 1's Only: \n");
+	for(int i = 0;i<n;i++)
+	    scanf("%1d", &a[i]);
+	int j =0 , c = 0;
+	for(int i = 0;i<n;i++)
+	{
+	    b[j++] = a[i];
+	    if(a[i] == 1)
+	        c++;
+	    else
+	        c = 0;
+	    if(c == 5)
+	    {
+	        b[j++] = 0;
+	        c= 0;
+	    }
+	}
+	 printf("After bit stuffing: \n");
+	 for(int i = 0;i<j;i++)
+	    printf("%d", b[i]);
+	 printf("\n");
+
+
+}
+
